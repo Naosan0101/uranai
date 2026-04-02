@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>占い入力画面</title>
+</head>
+<body>
+	<h2>生年月日と今の気分を入力</h2>
+	
+	<form th:action="@{/result}" th:object="${fortuneForm}" method="post">
+		
+		生年月日：
+<!--		↓古いバージョン-->
+<!--		<input type="date" th:field="*{birthday}">-->
+
+<!--		↓新しいバージョン-->
+			<select th:field="*{year}">
+				<option value="">年</option>
+				<option th:each="y : ${#numbers.sequence(2026, 1950)}"
+						th:value="${y}"
+						th:text="${y}">
+				</option>
+			</select>
+			
+			<select th:field="*{month}">
+				<option value="">月</option>
+				<option th:each="m : ${#numbers.sequence(1, 12)}"
+						th:value="${m}"
+						th:text="${m}">
+				</option>
+			</select>
+			
+			<select th:field="*{day}">
+				<option th:each="d : ${#numbers.sequence(1, 31)}"
+						th:value="${d}"
+						th:text="${d}">
+				</option>
+			</select>
+			
+		<br><br>
+		
+		<label>今の気分</label>
+		
+<!--		↓古いバージョン-->
+<!--		<select th:field="*{mood}">-->
+<!--			<option value="最高">最高</option>-->
+<!--			<option value="普通">普通</option>-->
+<!--			<option value="最悪">最悪</option>-->
+<!--		</select>-->
+
+<!--			↓新しいバージョン-->
+			<input type="radio" th:field="*{mood}" value="最高">😊最高
+			<input type="radio" th:field="*{mood}" value="普通">🙂普通
+			<input type="radio" th:field="*{mood}" value="最悪">😢最悪
+		
+		<br><br>
+		
+		<button type="submit">占う</button>
+		
+	</form>
+		<a th:href="@{/}">やっぱやめる</a>
+
+</body>
+</html>
