@@ -1,0 +1,13 @@
+package com.example.uranai.repository;
+
+import java.util.List;
+
+import org.apache.ibatis.annotations.Mapper;
+
+import com.example.uranai.entity.Fortune;
+
+@Mapper
+public interface FortuneMapper {
+	List<Fortune> selectAll();
+
+}
